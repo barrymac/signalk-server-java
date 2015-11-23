@@ -1,0 +1,80 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'nz.co.fortytwo.signalk.server'
+version = '0.0.1-SNAPSHOT'
+
+description = """signalk-server"""
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+    maven { url "file:///home/barry/src/sailing/signalk-server-java/src/localMvn" }
+    maven { url "https://maven.java.net/content/repositories/snapshots/" }
+    maven { url "http://www.sparetimelabs.com/maven2" }
+    maven { url "http://repository-dma.forge.cloudbees.com/release" }
+    maven { url "http://maven.restlet.com" }
+    maven { url "https://repo.eclipse.org/content/repositories/paho-releases" }
+    maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+project.ext {
+    camelVersion = "2.15.2"
+    jettyVersion = '8.1.16.v20140903'
+    activeMqVersion = "5.11.1"
+}
+
+dependencies {
+    compile(
+            'nz.co.fortytwo.signalk.core:signalk-core:0.0.1-SNAPSHOT',
+            "org.apache.activemq:activemq-broker:$activeMqVersion",
+            "org.apache.activemq:activemq-http:$activeMqVersion",
+            "org.apache.activemq:activemq-stomp:$activeMqVersion",
+            'net.java.dev.jna:jna:3.6.0-SNAPSHOT',
+            'com.sparetimelabs:purejavacomm:0.0.21',
+            "org.apache.camel:camel-core:$camelVersion",
+            "org.apache.camel:camel-websocket:$camelVersion",
+            "org.apache.camel:camel-stomp:$camelVersion",
+            "org.apache.camel:camel-cometd:$camelVersion",
+            "org.apache.camel:camel-xstream:$camelVersion",
+            "org.apache.camel:camel-stream:$camelVersion",
+            "org.apache.camel:camel-exec:$camelVersion",
+            "org.apache.camel:camel-restlet:$camelVersion",
+            "org.apache.camel:camel-jetty:$camelVersion",
+            "org.apache.camel:camel-netty4:$camelVersion",
+            "org.apache.camel:camel-mqtt:$camelVersion",
+            "org.apache.camel:camel-urlrewrite:$camelVersion",
+            "org.eclipse.jetty:jetty-server:$jettyVersion",
+            "org.eclipse.jetty:jetty-webapp:$jettyVersion",
+            "org.eclipse.jetty:jetty-io:$jettyVersion",
+            "org.eclipse.jetty:jetty-servlet:$jettyVersion",
+            "org.eclipse.jetty:jetty-util:$jettyVersion",
+            "org.mortbay.jetty:jsp-2.1-glassfish:2.1.v20100127",
+            'dk.dma.ais.lib:ais-lib-communication:2.1',
+            'commons-codec:commons-codec:1.5',
+            'org.apache.commons:commons-lang3:3.4',
+            'org.slf4j:slf4j-log4j12:1.6.6',
+            'log4j:log4j:1.2.17',
+            'joda-time:joda-time:2.4',
+            'commons-logging:commons-logging:1.1.1',
+            'commons-io:commons-io:2.4',
+            'dom4j:dom4j:1.6.1',
+            'com.jayway.jsonpath:json-path:1.2.0',
+            'org.fusesource.mqtt-client:mqtt-client:1.10',
+            'org.apache.httpcomponents:httpclient:4.4.1',
+            'org.apache.httpcomponents:httpmime:4.4.1',
+            'org.apache.httpcomponents:httpcore:4.4.1',
+            'javax.jmdns:jmdns:3.4.2-SNAPSHOT',
+    )
+    
+    compile('net.sf.marineapi:marineapi:0.7.0') {
+        exclude(module: 'cobertura-maven-plugin')
+    }
+
+    testCompile(
+            "org.apache.camel:camel-test:$camelVersion",
+            'junit:junit:4.11',
+            'com.ning:async-http-client:1.8.14'
+    )
+}
